@@ -11,6 +11,11 @@ spring:
       server:
         webflux:
           routes:
+            - id: ms-clientui
+              uri: http://127.0.0.1:8080
+              predicates:
+                - Path=/app/**
+
             - id: ms-patients
               uri: http://127.0.0.1:9001
               predicates:
