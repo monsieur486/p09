@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns:th="http://www.thymeleaf.org" lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Accueil</title></head>
+<body>
+<h1 th:text="${message}">Accueil public</h1>
+<a sec:authorize="isAnonymous()" th:href="@{/login}">Se connecter</a>
+<form method="post" sec:authorize="isAuthenticated()" th:action="@{/logout}">
+    <button type="submit">Se déconnecter ultra</button>
+</form>
+<a sec:authorize="isAuthenticated()" th:href="@{/app/dashboard}">Aller au dashboard (protégé)</a>
+</body>
+</html>

@@ -1,0 +1,17 @@
+server:
+  port: 9000
+
+spring:
+  application:
+    name: ms-gateway
+  main:
+    web-application-type: reactive
+  cloud:
+    gateway:
+      server:
+        webflux:
+          routes:
+            - id: ms-patients
+              uri: http://127.0.0.1:9001
+              predicates:
+                - Path=/patients/**

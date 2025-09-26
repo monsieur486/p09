@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard</title></head>
+<body>
+<h1>Ajouter patient</h1>
+<form th:action="@{/dashboard/ajout}" th:object="${patient}" method="post">
+    <label for="firstName">Prénom :</label>
+    <input type="text" id="firstName" th:field="*{firstName}" required />
+    <br/>
+    <label for="lastName">Nom :</label>
+    <input type="text" id="lastName" th:field="*{lastName}" required />
+    <br/>
+    <label for="birthDate">Date de naissance :</label>
+    <input type="date" id="birthDate" th:field="*{birthDate}" required />
+    <br/>
+    <label for="gender">Gender :</label>
+    <input type="text" id="gender" th:field="*{gender}" required />
+    <br/>
+    <label for="address">Adresse :</label>
+    <input type="text" id="address" th:field="*{postalAddress}"  />
+    <br/>
+    <label for="phoneNumber">Numéro de téléphone :</label>
+    <input type="text" id="phoneNumber" th:field="*{phoneNumber}" />
+    <br/>
+    <button type="submit">Créer</button>
+</form>
+<p><a th:href="@{/}">Home</a></p>
+</body>
+</html>
