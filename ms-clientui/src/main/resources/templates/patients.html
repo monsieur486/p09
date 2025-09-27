@@ -1,16 +1,46 @@
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="fr">
+<!DOCTYPE HTML>
+<html lang="fr"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Dashboard</title></head>
+    <title>Liste des patients</title>
+    <div th:replace="~{fragments/header :: header-css}"></div>
+</head>
 <body>
-<h1>Liste des patients</h1>
-<ul>
-    <li th:each="patient : ${patients}">
-        <a th:href="@{'/app/dashboard/' + ${patient.id}}" th:text="${patient.firstName} + ' ' + ${patient.lastName}"></a>
-    </li>
-</ul>
-<p><a th:href="@{/app/dashboard/ajout}">Ajouter un nouveau patient</a></p>
-<p><a th:href="@{/}">Home</a></p>
+<div th:replace="~{fragments/menu :: menu}"></div>
+<div class="container">
+    <div class="starter-template">
+        <h5>Liste des patients</h5>
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Prénom</th>
+                <th>Nom</th>
+                <th>Date de naissance</th>
+                <th>Sexe</th>
+                <th>Adresse postale</th>
+                <th>Téléphone</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="patient : ${patients}">
+                <td th:text="${patient.firstName}"></td>
+                <td th:text="${patient.lastName}"></td>
+                <td th:text="${#temporals.format(patient.birthDate, 'dd/MM/yyyy')}"></td>
+                <td th:text="${patient.gender}"></td>
+                <td th:text="${patient.postalAddress}"></td>
+                <td th:text="${patient.phoneNumber}"></td>
+                <td>
+                    <a th:href="@{'/app/dashboard/' + ${patient.id}}">📋 Fiche</a> |
+                    <a th:href="@{'/app/dashboard/'+ ${patient.id} +'/update' }">✍️ Modifier</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <a th:href="@{/app/dashboard/ajout}">✚ Ajouter patient</a>
+    </div>
+</div>
+<div th:replace="~{fragments/footer :: footer}"></div>
 </body>
 </html>

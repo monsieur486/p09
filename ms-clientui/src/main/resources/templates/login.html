@@ -1,21 +1,29 @@
-<!DOCTYPE html>
-<html xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+<!DOCTYPE HTML>
+<html lang="fr"
+      xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Connexion</title></head>
+    <title>Connexion</title>
+    <div th:replace="~{fragments/header :: header-css}"></div>
+</head>
 <body>
-<h1>Connexion</h1>
-<form sec:authorize="isAnonymous()" method="post" th:action="@{/login}">
-    <div><input name="username" placeholder="Utilisateur" type="text"/></div>
-    <div><input name="password" placeholder="Mot de passe" type="password"/></div>
-    <button type="submit">Se connecter</button>
-    <div th:if="${param.error}">Identifiants invalides.</div>
-    <div th:if="${param.logout}">Déconnecté.</div>
-</form>
-<form sec:authorize="isAuthenticated()"  method="post" th:action="@{/logout}">
-    <button type="submit">Se déconnecter</button>
-</form>
-<p><a th:href="@{/}">Retour à l'accueil</a></p>
+<div th:replace="~{fragments/menu :: menu}"></div>
+<div class="container">
+    <div class="starter-template">
+        <h5>Connexion</h5>
+        <form method="post" th:action="@{/login}">
+            <div><label>Utilisateur :
+                <input name="username" type="text"/>
+            </label></div>
+            <div><label>Mot de passe :
+                <input name="password" type="password"/>
+            </label></div>
+            <button type="submit">Se connecter</button>
+            <div th:if="${param.error}">Identifiants invalides.</div>
+            <div th:if="${param.logout}">Déconnecté.</div>
+        </form>
+    </div>
+</div>
+<div th:replace="~{fragments/footer :: footer}"></div>
 </body>
 </html>

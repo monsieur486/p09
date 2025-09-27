@@ -22,8 +22,14 @@ public class SecurityConfig {
 
   @Bean
   SecurityFilterChain filter(HttpSecurity http) throws Exception {
-    http.authorizeHttpRequests(auth -> auth
-                    .requestMatchers("/", "/home", "/css/**", "/js/**", "/images/**").permitAll()
+    http
+            .authorizeHttpRequests(auth -> auth
+                    .requestMatchers("/",
+                            "/home",
+                            "/css/**",
+                            "/js/**",
+                            "/images/**")
+                    .permitAll()
                     .anyRequest().authenticated()
             )
             .formLogin(
@@ -31,11 +37,14 @@ public class SecurityConfig {
                             .loginPage("/login")
                             .loginProcessingUrl("/login")
                             .defaultSuccessUrl("/app/dashboard", true)
-                            .permitAll())
-            .logout(logout -> logout
-                    .logoutUrl("/logout")
-                    .logoutSuccessUrl("/login?logout")
-                    .permitAll()
+                            .permitAll()
+            )
+            .logout(
+                    logout -> logout
+                            .logoutUrl("/logout")
+                            .logoutSuccessUrl("/login?logout")
+                            .deleteCookies("JSESSIONID")
+                            .permitAll()
             );
     return http.build();
   }

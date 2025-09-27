@@ -1,6 +1,5 @@
 package com.mr486.msclientui.web;
 
-import com.mr486.msclientui.dto.form.PatientDto;
 import com.mr486.msclientui.dto.response.Patient;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.ParameterizedTypeReference;
