@@ -17,6 +17,7 @@
         <p>Genre : <span th:text="${patient.gender}"></span></p>
         <p>Adresse : <span th:text="${patient.postalAddress}"></span></p>
         <p>Téléphone : <span th:text="${patient.phoneNumber}"></span></p>
+        <p><a th:href="@{'/app/dashboard/' + ${patient.id} + '/notes'}">📝 Notes</a></p>
         <p><a th:href="@{/app/dashboard}">Retout à la liste des patients</a></p>
     </div>
 </div>

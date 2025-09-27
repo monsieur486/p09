@@ -15,3 +15,7 @@ spring:
               uri: http://127.0.0.1:9001
               predicates:
                 - Path=/patients/**
+            - id: ms-notes
+              uri: http://127.0.0.1:9002
+              predicates:
+                - Path=/notes/**
