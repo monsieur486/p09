@@ -1,0 +1,21 @@
+server:
+  port: 9003
+
+spring:
+  config:
+    import: optional:file:.env[.properties]
+  application:
+    name: ms-risque
+
+services:
+  patients-service:
+    url: ${PATIENTS_SERVICE_URL:http://localhost:9001}
+  notes-service:
+    url: ${NOTES_SERVICE_URL:http://localhost:9002}
+
+security:
+  app-user:
+    username: ${APP_USERNAME:app_user}
+    password: ${APP_PASSWORD:app_password}
+
+

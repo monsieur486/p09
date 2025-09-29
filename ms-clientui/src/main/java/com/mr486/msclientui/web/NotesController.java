@@ -1,7 +1,6 @@
 package com.mr486.msclientui.web;
 
 import com.mr486.msclientui.dto.response.Note;
-import com.mr486.msclientui.dto.response.Patient;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpEntity;
@@ -15,7 +14,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -47,23 +45,24 @@ public class NotesController {
     return "notes";
   }
 
-  /*@GetMapping("/dashboard/ajout")
-  public String showCreatePatientForm(Model model) {
-    model.addAttribute("patient", new Patient());
-    return "patient-ajout";
+  @GetMapping("/dashboard/{patientId}/notes/ajout")
+  public String showCreateNoteForm(@PathVariable Long patientId, Model model) {
+    model.addAttribute("patientId", patientId);
+    model.addAttribute("note", new Note());
+    return "note-ajout";
   }
 
-  @PostMapping("/dashboard/ajout")
-  public String ajoutPatientPost(Model model, Patient patient) {
-    HttpEntity<Patient> requestEntity = new HttpEntity<>(patient);
+  @PostMapping("/dashboard/{patientId}/notes")
+  public String ajoutNotePost(Model model, @PathVariable Long patientId, Note note) {
+    HttpEntity<Note> requestEntity = new HttpEntity<>(note);
 
-    ResponseEntity<Patient> scoreResponse = restTemplate.exchange(
-            gatewayBase + "/patients",
+    ResponseEntity<Note> scoreResponse = restTemplate.exchange(
+            gatewayBase + "/notes/" + patientId,
             HttpMethod.POST,
             requestEntity,
-            new ParameterizedTypeReference<Patient>() {
+            new ParameterizedTypeReference<Note>() {
             }
     );
-    return "redirect:/app/dashboard";
-  }*/
+    return "redirect:/app/dashboard/{patientId}/notes";
+  }
 }

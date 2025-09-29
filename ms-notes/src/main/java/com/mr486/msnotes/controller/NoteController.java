@@ -21,8 +21,8 @@ public class NoteController {
   }
 
   @PostMapping(value = "/{patientId}", consumes = "application/json")
-  public void addNote(@PathVariable Long patientId, @RequestBody NoteDto noteDto) {
-    noteService.save(patientId, noteDto);
+  public Note addNote(@PathVariable Long patientId, @RequestBody NoteDto noteDto) {
+    return noteService.save(patientId, noteDto);
   }
 
 }

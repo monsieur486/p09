@@ -12,14 +12,14 @@ spring:
         webflux:
           routes:
             - id: ms-patients
-              uri: http://127.0.0.1:9001
+              uri: http://ms-patients:9001
               predicates:
                 - Path=/patients/**
             - id: ms-notes
-              uri: http://127.0.0.1:9002
+              uri: http://ms-notes:9002
               predicates:
                 - Path=/notes/**
             - id: ms-risque
-              uri: http://127.0.0.1:9003
+              uri: http://ms-risque:9003
               predicates:
                 - Path=/evaluation/**

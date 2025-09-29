@@ -6,7 +6,7 @@ spring:
 
 app:
   gateway:
-    base-url: http://localhost:9000
+    base-url: http://ms-gateway:9000
   auth:
     username: ${APP_USERNAME:app_user}
     password: ${APP_PASSWORD:app_password}

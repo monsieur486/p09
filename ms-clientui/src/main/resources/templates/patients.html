@@ -33,8 +33,9 @@
                 <td th:text="${patient.phoneNumber}"></td>
                 <td>
                     <a th:href="@{'/app/dashboard/' + ${patient.id}}">🎫 Fiche</a> |
+                    <a th:href="@{'/app/dashboard/' + ${patient.id} +'/update' }">✍️ Modifier</a> |
                     <a th:href="@{'/app/dashboard/' + ${patient.id} + '/notes'}">📝 Notes</a> |
-                    <a th:href="@{'/app/dashboard/'+ ${patient.id} +'/update' }">✍️ Modifier</a>
+                    <a th:href="@{'/app/dashboard/' + ${patient.id} + '/evaluation'}">⚠️ Risque</a>
                 </td>
             </tr>
             </tbody>

@@ -19,13 +19,13 @@ public class NoteService {
     return noteRepository.findByPatientIdOrderByCreatedDateDesc(patientId);
   }
 
-  public void save(Long patientId, NoteDto noteDto) {
+  public Note save(Long patientId, NoteDto noteDto) {
     Note note = Note.builder()
             .patientId(patientId)
             .content(noteDto.getContent())
             .createdDate(LocalDateTime.now())
             .build();
-    noteRepository.save(note);
+    return noteRepository.save(note);
   }
 
 }

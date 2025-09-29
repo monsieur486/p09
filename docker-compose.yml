@@ -28,17 +28,81 @@ services:
         volumes:
             - database-data:/data/db
 
-    ms-mexpress:
-        image: mongo-express:latest
-        container_name: ms-mexpress
+    ms-patients:
+            build:
+                context: ms-patients
+                dockerfile: Dockerfile
+            container_name: ms-patients
+            profiles: ["fullstack"]
+            depends_on:
+                - patients-db
+            environment:
+                SPRING_PROFILES_ACTIVE: docker
+                APP_USERNAME: ${APP_USERNAME:-app_user}
+                APP_PASSWORD: ${APP_PASSWORD:-app_password}
+            ports:
+                - "9001:9001"
+
+    ms-notes:
+            build:
+                context: ms-notes
+                dockerfile: Dockerfile
+            container_name: ms-notes
+            profiles: ["fullstack"]
+            depends_on:
+                - notes-db
+            environment:
+                SPRING_PROFILES_ACTIVE: docker
+                APP_USERNAME: ${APP_USERNAME:-app_user}
+                APP_PASSWORD: ${APP_PASSWORD:-app_password}
+            ports:
+                - "9002:9002"
+
+    ms-risque:
+            build:
+                context: ms-risque
+                dockerfile: Dockerfile
+            container_name: ms-risque
+            profiles: ["fullstack"]
+            depends_on:
+                - ms-patients
+                - ms-notes
+            environment:
+                SPRING_PROFILES_ACTIVE: docker
+                APP_USERNAME: ${APP_USERNAME:-app_user}
+                APP_PASSWORD: ${APP_PASSWORD:-app_password}
+            ports:
+                - "9003:9003"
+
+    ms-gateway:
+        build:
+            context: ms-gateway
+            dockerfile: Dockerfile
+        container_name: ms-gateway
+        profiles: ["fullstack"]
         depends_on:
-            - notes-db
-        ports:
-            - 27018:8081
+            - ms-patients
+            - ms-notes
+            - ms-risque
         environment:
-            ME_CONFIG_MONGODB_ADMINUSERNAME: ${MONGO_INITDB_ROOT_USERNAME:-notes_user}
-            ME_CONFIG_MONGODB_ADMINPASSWORD: ${MONGO_INITDB_ROOT_PASSWORD:-notes_password}
-            ME_CONFIG_MONGODB_SERVER: notes-db
+            SPRING_PROFILES_ACTIVE: docker
+        ports:
+            - "9000:9000"
+
+    ms-clientui:
+        build:
+            context: ms-clientui
+            dockerfile: Dockerfile
+        container_name: ms-clienui
+        profiles: ["fullstack"]
+        depends_on:
+            - ms-gateway
+        environment:
+            SPRING_PROFILES_ACTIVE: docker
+            APP_USERNAME: ${APP_USERNAME:-app_user}
+            APP_PASSWORD: ${APP_PASSWORD:-app_password}
+        ports:
+            - "8080:8080"
 
 volumes:
   db_data:
