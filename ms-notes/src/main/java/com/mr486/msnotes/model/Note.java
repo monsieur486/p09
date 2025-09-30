@@ -7,9 +7,10 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.time.LocalDateTime;
+import java.util.Date;
 
 @Document(collection = "notes")
 @Data
@@ -22,9 +23,10 @@ public class Note {
   private String id;
 
   @JsonIgnore
+  @Indexed
   private Long patientId;
   private String content;
   @JsonIgnore
-  private LocalDateTime createdDate;
+  private Date createdDate;
 
 }

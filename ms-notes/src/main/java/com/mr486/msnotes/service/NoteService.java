@@ -6,7 +6,6 @@ import com.mr486.msnotes.repository.NoteRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -23,7 +22,7 @@ public class NoteService {
     Note note = Note.builder()
             .patientId(patientId)
             .content(noteDto.getContent())
-            .createdDate(LocalDateTime.now())
+            .createdDate(new java.util.Date())
             .build();
     return noteRepository.save(note);
   }
