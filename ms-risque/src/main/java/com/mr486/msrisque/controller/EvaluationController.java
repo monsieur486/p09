@@ -1,6 +1,5 @@
 package com.mr486.msrisque.controller;
 
-import com.mr486.msrisque.dto.Evaluation;
 import com.mr486.msrisque.service.EvaluationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,8 +12,8 @@ public class EvaluationController {
 
   private final EvaluationService evaluationService;
 
-  @GetMapping(value = "/evaluation/{patientId}", produces = "application/json")
-  public Evaluation evaluate(@PathVariable Long patientId) {
-    return evaluationService.evaluateRisk(patientId);
+  @GetMapping(value = "/evaluation/{patientId}")
+  public String evaluate(@PathVariable Long patientId) {
+    return evaluationService.evaluationDuRisque(patientId);
   }
 }

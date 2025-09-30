@@ -1,6 +1,5 @@
 package com.mr486.msclientui.web;
 
-import com.mr486.msclientui.dto.response.Evaluation;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
@@ -27,12 +26,12 @@ public class EvaluationController {
 
   @GetMapping("/dashboard/{patientId}/evaluation")
   public String getNotes(Model model, @PathVariable Long patientId) {
-    Evaluation evaluation = new Evaluation();
-    ResponseEntity<Evaluation> response = restTemplate.exchange(
+    String evaluation;
+    ResponseEntity<String> response = restTemplate.exchange(
             gatewayBase + "/evaluation/" + patientId,
             HttpMethod.GET,
             null,
-            new ParameterizedTypeReference<Evaluation>() {
+            new ParameterizedTypeReference<String>() {
             }
     );
     evaluation = response.getBody();

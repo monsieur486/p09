@@ -11,8 +11,7 @@
 <div class="container">
     <div class="starter-template">
         <h5>Evaluation rique patient</h5>
-        <p>Level : <span th:text="${evaluation.riskLevel}"></span></p>
-        <p>Risque : <span th:text="${evaluation.denomination}"></span></p>
+        <p>Risque : <span th:text="${evaluation}"></span></p>
     </div>
     <p><a th:href="@{'/app/dashboard/' + ${patientId}}">Retour à la fiche patient</a></p>
     <p><a th:href="@{/app/dashboard}">Retout à la liste des patients</a></p>
